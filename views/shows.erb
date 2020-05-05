@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>9:30 Show</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Event</th>
+      <th scope="col">Date</th>
+      <th scope="col">Price</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @concerts.each do | concert | %>
+    <tr>
+      <%price = concert.at_css('.price-range').text %>
+      <% if !price.nil? %>
+      <td><a href="<%= concert.at_css('.artist-info a') [:href] %>"><%= concert.at_css('.event-name').text %></td>
+      <td><%=concert.at_css('.dates').text %></td>
+      <td><%=concert.at_css('.price-range').text %></td>
+      <td><%=concert.at_css('.doors').text %></td>
+      <% else %>
+      <td><del><a href="<%= concert.at_css('.artist-info a') [:href] %>"><%= concert.at_css('.event-name').text %></del></td>
+      <td><%=concert.at_css('.dates').text %></td>
+      <td><%=concert.at_css('.price-range').text %></td>
+      <td><p>SOLD OUT</p></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</body>
+</html>
+</DOCTYPE>
